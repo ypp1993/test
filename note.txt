@@ -1,0 +1,42 @@
+1、windows terminal 固定任务栏，便捷开发
+2、百度 google镜像 
+3、文档整理思路
+4、vim 写C++
+5、 1）存储问题：存进内存还是cbase？
+	考虑因素：访问效率；数据一致性
+	2）日志问题，多线程日志 
+		发送日志服务器；命令行重定向到文件
+	3）push-log出现客户端有日志记录，server端没有的情况 
+	4）服务器重启问题：uniq_server 数据丢失，重复
+	5)脏数据问题： 存在Cbase里面的数据，如果长期不用，（过期时间设置）（该用户删除应用），那么该数据就成为了脏数据。！！
+	1、数据存储：
+	cbase/内存
+	考虑因素：数据一致性、访问效率
+	2、考虑将去重等操作放入unique_server ：减少http 和unique 之间通信次数； （以后可以考虑unique单独放一台机器上）
+	3、用户去重以及超额需要的数据，是放入内存，还是cbase 
+	考虑服务器的重启特别是非正常宕机，放cbase更加好一些
+	考虑cbase不支持批量更新操作，如果逐个更新，会造成cbase的阻塞，影响传输，
+	所以，通过增加用户<deviceID,value>中value维护的信息，来分散更新
+	计算每个用户键值对每日更新次数<11(暂时<deviceID,time+sum+cands_version+videoID>)
+	4、日志记录 LOG() 重定向到指定文本，
+	在上传htfs之前，进行过滤操作（目前这么做，以后看需求，可以考虑日志收集服务器）
+  5、将用户的键值对value存成json字符窜，原因：以后的可扩展性强。
+
+6、谷歌标签页设置
+	在chrome浏览器地址了输入“ chrome://flags搜索”
+	找到「启用 Instant Extended API 」这一项，停用，重启浏览器，解决
+7、Apache Cassandra ?? datastax是其驱动 
+
+3-29$$:
+  1、JSon字符窜处理过程完成，并进行测试；优化Recommend函数的多重判断的结构；
+  2、format工具优化（显示空格以及行尾符号），熟悉vim查找命令
+  3、C++ code format 指针传参，引用传参确认；error_msg优化；
+  4、了解Python脚本编写，http请求
+3-30$$:
+  1、memcached 测试
+  2、code review
+  3、Java环境检查
+  4、Python httplib urllib 熟悉vim查找命令
+  5、scala语法了解；thrift框架了解；
+  1)linux vim 编码设置为utf-8 默认为latin windows下的utf-8格式，sftp传输过去，中文乱码
+  2）locate安装 使用 ; find 命令；
