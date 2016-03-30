@@ -1,0 +1,102 @@
+git fetch origin  git merge origin/pptv-vision
+git add src/*  git commit -m ""  git push origin master:pptv-vision 或者 master:master
+git remote -v 查看远程权限 
+git remote add origin ssh://root@10.11.29.30:2200/root/git 
+git fetch origin 初始化后，拉到本地
+现在分支是 git merge origin/pptv-vision 
+  co = checkout
+  ci = commit
+  ca = commit --amend
+  st = status
+  fr = !git fetch && git rebase
+  sp = !git stash && git pull && git stash pop
+  br = branch
+  dc = diff --cached
+  sst = status -s
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  review = push origin HEAD:refs/for/refs/heads/master
+
+1、push git push -u origin master 把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程
+要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
+
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
+
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改
+删除dev分支  git branch -d dev
+
+git reflog用来记录你的每一次命令
+1\add
+	git add [file] 文件添加到仓库
+2、init 
+	git init 将当前目录改为git可以管理的目录；
+3、ls -ah 显示隐藏文件
+4、commit 
+	git commit -m " str" 文件提交仓库，并加上说明；
+	commit可以一次提交很多文件，所以你可以多次add不同的文件
+	git add命令实际上就是把要提交的所有修改放到暂存区（Stage），
+	然后，执行git commit就可以一次性把暂存区的所有修改提交到分支
+5、status 
+	git status 查看状态
+6、diff
+	git diff [file] 查看文件修改信息；
+	git diff HEAD -- readme.txt命令可以查看工作区和版本库里面最新版本的区别：
+7、log 
+	git log 查看日志；
+	git log --pretty=oneline 
+	git reflog用来记录你的每一次命令
+	git log -p master..origin/master 然后比较本地的master分支和origin/master分支的差别
+8、reset 
+	 git reset --hard HEAD^ 回退一个版本；
+	  git reset --hard 3628164 会退到一个指定版本，数字是版本ID；不用写全
+9、cat 
+	cat readme.txt 查看文件内容 
+10、checkout 
+	git checkout pptv-vision 
+	git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销
+	git checkout -- file命令中的--很重要，没有--，就变成了“创建一个新分支”的命令，
+	git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+	一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+	一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+	总之，就是让这个文件回到最近一次git commit或git add时的状态;
+	git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原
+11、push
+	git push -u origin master 本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。
+	由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的
+	master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+12、branch 
+	查看分支：git branch
+	创建分支：git branch <name>
+	切换分支：git checkout <name>
+	创建+切换分支：git checkout -b <name>
+	合并某分支到当前分支：git merge <name>
+	删除分支：git branch -d <name>
+	git log --graph --pretty=oneline --abbrev-commit 我们用git log看看合并分支历史
+13、git remote -v  显示了可以抓取和推送的origin的地址。如果没有推送权限，就看不到push的地址
+	git push origin master 推送分支，就是把该分支上的所有本地提交推送到远程库
+	推送分支，就是把该分支上的所有本地提交推送到远程库。推送时，要指定本地分支，
+	这样，Git就会把该分支推送到远程库对应的远程分支上：
+	如果要推送其他分支，比如dev，就改成：
+	$ git push origin dev
+14、如果你没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见
+15、pull git pull：相当于是从远程获取最新版本并merge到本地
+	git pull origin master
+	上述命令其实相当于git fetch 和 git merge
+	在实际使用中，git fetch更安全一些
+	因为在merge前，我们可以查看更新情况，然后再决定是否合并
+16、stash 开发人员常常遇到这种情况：花了几天时间一直在做一个新功能，已经改了差不多十几个文件，
+	突然有一个bug需要紧急解决，然后给一个build测试组。在Git问世之前基本上靠手动备份，费时且容易出错。
+	git stash命令简而言之就是帮助开发人员暂时搁置当前已做的改动，倒退到改动前的状态，进行其他的
+	必要操作（比如发布，或者解决一个bug，或者branch，等等），之后还可以重新载入之前搁置的改动，很cool吧？
+	首先，用git add把所有的改动加到staging area。
+	git add .
+	接着用git stash把这些改动搁置。
+	git stash
+	到这里，当前工作平台就回复到改动之前了。该干嘛干嘛，此处省略1万字。
+	需要找回之前搁置的改动继续先前的工作了？
+	git stash apply 即可。
+	也可以用 git stash list 来查看所有搁置版本（可能搁置了很多次，最好不要这样，容易搞混）
+	在出现一个搁置栈的情况下，比如如果你想找回栈中的第2个，可以用 git stash apply stash@{1}
+	如果想找回第1个，可以用 git stash pop
+	如果想删除一个stash，git stash drop <id>
+	删除所有stash，git stash clear
+17、git clone ssh://yangpeipei@legit.letv.cn:29418/search_and_rec

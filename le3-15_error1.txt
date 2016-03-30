@@ -1,0 +1,178 @@
+1、mvn clean package
+error: -Dmaven.multiModuleProjectDirectory system propery is not set. Check $M2_HOME environment variable and mvn script match.
+-Dmaven.multiModuleProjectDirectory=%M2_HOME%
+2、jdk安装 默认安装
+否则报错：找不到主类；
+3、git fetch error 
+git 版本过新。。
+ETC profile 加一句话。
+4、非完整工程的大文件，新建空project ，导入文件夹（所有）。
+5、FAT的U盘大于4G的文件不能移动，可以压缩为2个文件。NTFS的可以。
+6、1)、int main()
+	{
+	 map<string, int> word_count;
+	 string word;
+	 while( cin >> word ){
+	  pair<map<string, int>::iterator, bool> ret = word_count.insert(make_pair(word,1));//能否详细解释这一步的过程？
+	  if( !ret.second ){
+	   ++ret.first->second;
+	  }
+	 }
+	 cout << ret.first->second << endl;
+	 return 0;
+	}
+	 也就是说，如果map中不含有_Val中的key就返回指向这个新插入节点的迭代器和true组成的pair。如果map中含有_Val中的key就返回指向这个已经存在的节点和false组成的pair。
+	 2）、 boost::shared_ptr<UniqServerRam> handler(new UniqServerRam);
+	 3)do{}while(false) 唯一好处，可以跳出循环（break）
+
+7、日志处理 	 
+	 cd C:\Program Files (x86)\GnuWin32\bin
+	 wget 10.176.28.34:8000/run_9975.txt
+	 
+	 cd D:\code\pyLog\data 
+	 
+8、系统配置问题
+	网卡 设置两个 一个桥接、一个nat，为了连接代理翻墙 
+	设置分区 swap 和 / 两个 
+	centOS 默认网络没开启  vim etc/sysconfig/network-scripts/ifcfg-enp0s3
+	设置 ONBOOT = ON 
+	service network start
+	ping baidu.com 测试
+
+	blade 有问题 原因：安装libevent第三方库 
+
+	使用blade需要安装 scons，并推荐安装ccache提升编译速度。
+	CENTOS:
+    sudo yum install scons g++ ccache
+	然后 ./tools/typhoon-blade-master/blade build base 编译base工程 
+	
+	编译需要下载libevent第三方库
+	yum search libevent
+	yum install libevent-devel.x86_64
+	
+
+8、 
+	曾哥虚拟机：
+	10.135.28.166(内部IP)
+	111.206.209.168(外部IP)
+	JxI16bNKCYVwMpws69Rr
+	
+	yangpeipei:虚拟机
+	ssh 10.11.146.104
+	SmWa5boh3zQqKA6JevL6 
+	
+	ssh root@10.11.146.104
+	Password: 
+	
+	安卓六台服务器的账号：rec 密码：rec1223a
+	ssh 10.176.28.34 
+	/home/rec/data/mobile_push/andriod
+	
+	堡垒机：
+	ssh jump2.oss.letv.cn -p 60022
+	登录堡垒机 然后
+	ssh 10.135.28.166 （22）
+	letv/search_ 
+	
+	
+	电脑 windows本地 ip: 10.58.92.47
+  
+  memcached 10.126.32.102 10.126.32.184-186
+ 
+10、命令行
+	sz letv.pkgs.tar  远程文件拉取到本地
+	ip addr (bcast 的是IP)
+	 
+	thrift -r --gen cpp student.thrift  
+	 将所有文件移动到当前目录下 
+	 
+	$ mv /usr/udt/* .
+	 
+	touch 新建文件 
+	 
+	 远程复制文件
+		 1）scp yangpeipei@10.58.92.47:/D:\document\download\mobile_push/http_server.cc http_server.cc
+		 scp administrator@10.58.92.47:/D:\document\download\mobile_push/http_server.cc http_server.cc
+		 2）python -m SimpleHTTPServer
+		 wget
+		 3）rz /sz
+	 pwd 显示目录
+	 ls -a 显示所有文件
+	 
+	 ping 192.168.120.204 > test.log
+	 
+	 
+	 查看硬盘：df
+
+	内存： free -m 按兆为单位输出内存的已用，未用，总共等结果
+	
+	Mem:         15949      14068       1880          0        286       6668
+	-/+ buffers/cache:       7114       8835
+	Swap:         8191        212       7979
+
+	cpu:  cat /proc/cpuinfo  输出各处理器的详细信息
+	
+	uname -a 内核版本号 
+	
+	vim 里面 调换2行的顺序： dd 剪切至一个地方 p 粘贴
+  
+  ls -l filename.txt 查看文件权限
+  
+  行尾空格处理：vim 下 /\s\+$ 显示行尾空格； :nohl取消之前查找的高亮显示
+  可以在.vimrc中如下配置，让vim高亮显示空格：
+                highlight WhitespaceEOL ctermbg=red guibg=red 
+                match WhitespaceEOL /\s\+$/
+	 
+11、push-log 输出：
+	 3aa87ef73f48e9361847e6228cdf7be18-24894114100094721420160322 08:48:22
+	Log 输出信息
+	I0322 20:38:21.969889  8447 recommendation/online/mobile_push_develop/uniq_server.cc:102] [umap extends to 2800000]
+12、./http_server 启动server
+	1)memcached 调用 加命名空间 rec 
+	2)error：： undefined reference to `memcached_create' BUILD文件没有加入对其依赖
+	3)thrift 文件中定义 string Recommend(1:string user); 
+				client和server中定义：void Recommend(std:string &root_str, const std::string& user)
+	4)./third_party/thrift/include/server/TNonblockingServer.h:70: error: multiple types in one declaration
+	./third_party/thrift/include/server/TNonblockingServer.h:70: error: declaration does not declare anything
+	 原因 http_threads.cc 里面 最后2个宏顺序不能变
+	 #include "recommendation/online/mobile_update_push/unique_client.h"
+	#include "third_party/libevent-2.0.11-stable/evhttp.h"
+	event.h 必须放最后  
+  3-29$$:
+  1、错误：error_msg->swap("user has recommended once!");
+  正确：
+        std::string msg = "user has recommended once!";
+        error_msg->swap(msg);
+  分析：C++默认的”“字符窜是一个char数组；
+  这里swap的参数类型没有char数组的，并不能自动转换；=赋值时候可以自动转换。
+  2、Json::Value指针传值的解决办法： (*value)["sum_day"] = Json::Value(GetToday());
+  json重载了 == > 可以直接比较
+  3、对于unique_server中void Recommend(std::string& msg, const std::string& user) 函数的思考，优化结构
+  error_msg 以及多个if else break 的处理；
+  4、emacs 安装 tar -zvxf emacs- 
+                ./configue --with-xpm=no --with-jpeg=no --with-gif=no --with-tiff=no
+                make
+                make install
+	5、vim 查找 /或者? 向下；向上查找。 n/N 移动到下一个上一个匹配
+    多行复制粘贴 shift+v 开始， 移动到结束行 D 剪切 p 粘贴
+  6、Python 的第三方库 httplib2是好用，但是在3才能用。。不兼容啊。。。
+  7、 vim ~/.bashrc 
+    add 一行 export TMOUT=
+  8、C++ 中 list是关键字 不能做变量名称；
+  9、locate 命令安装 http://blog.sina.com.cn/s/blog_695d0b300101fjwy.html
+    yum list | grep locate
+    yum -y install mlocate
+    updatedb
+    locate fileName**
+  10、updatedb updatedb命令用来创建或更新slocate命令所必需的数据库文件。updatedb
+    命令的执行过程较长，因为在执行时它会遍历整个系统的目录树，并将所有的文件信息写
+    入slocate数据库文件中。 
+    补充说明：slocate本身具有一个数据库，里面存放了系统中
+    文件与目录的相关信息
+  11、find 搜索  http://www.01happy.com/linux-locate-find-which-whereis/ 
+  find path -name "regex"
+  find path mtime /atime
+  find 
+
+  
+    
