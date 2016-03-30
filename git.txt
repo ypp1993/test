@@ -1,4 +1,4 @@
-git fetch origin  git merge origin/pptv-vision
+﻿git fetch origin  git merge origin/pptv-vision
 git add src/*  git commit -m ""  git push origin master:pptv-vision 或者 master:master
 git remote -v 查看远程权限 
 git remote add origin ssh://root@10.11.29.30:2200/root/git 
@@ -8,7 +8,10 @@ git fetch origin 初始化后，拉到本地
   ci = commit
   ca = commit --amend
   st = status
-  fr = !git fetch && git rebase
+  fr = !git fetch && g
+
+
+it rebase
   sp = !git stash && git pull && git stash pop
   br = branch
   dc = diff --cached
