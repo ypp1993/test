@@ -1,0 +1,6 @@
+3-30$$ 
+  工作流程：暂时知道使用-》熟练运用技巧-》深入了解源码、原理
+  每天都要思考、总结，不能盲目
+  1、jetty server 了解；
+  2、Apache Cassandra 
+  3、强大的awesome XXX！
